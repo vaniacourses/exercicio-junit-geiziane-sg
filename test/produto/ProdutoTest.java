@@ -11,6 +11,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ProdutoTest {
@@ -19,23 +20,52 @@ public class ProdutoTest {
 	
 	@BeforeEach
 	public void inicializa() {
-		livro = new Produto("Introdução ao Teste de Software", 100.00);
+		livro = new Produto("Introduï¿½ï¿½o ao Teste de Software", 100.00);
 	}
 	
 	@Test
 	public void testCriaProduto() {
 		Assertions.assertAll("livro",
-				() -> assertEquals("Introdução ao Teste de Software", livro.getNome()),
+				() -> assertEquals("Introduï¿½ï¿½o ao Teste de Software", livro.getNome()),
 				() -> assertTrue(100.00 == livro.getPreco())						
 				);
 	}
 	
 	@Test
 	public void testProdutosIguais() {
-		Produto livro2 = new Produto("Introdução ao Teste de Software", 90.00);
+		Produto livro2 = new Produto("Introduï¿½ï¿½o ao Teste de Software", 90.00);
 		
 		assertNotSame(livro, livro2);
 		
+	}
+	
+	
+	
+	@Test
+	@DisplayName("Testa a alteraÃ§Ã£o do nome do produto usando setNome")
+	public void testSetNome() {
+	    String novoNome = "Java para Iniciantes";
+	    livro.setNome(novoNome);
+	    }
+	
+	
+	
+	@Test
+	@DisplayName ("Testa alteraÃ§Ã£o do preÃ§o do produto usando getPreco")
+	public void testSetPreco() {
+	Double precoNovo = 34.00;
+	livro.setPreco(precoNovo);
+	assertEquals(precoNovo,livro.getPreco())
+			;}
+	
+	
+@DisplayName("Testa se o equals considera objetos diferentes com o mesmo nome como iguais")
+	
+	@Test  
+	public void testProdutosDistintosNomeIguais() {  
+	    Produto livro3 = new Produto("A menina que roubava livros", 40.00);  
+	    Produto livro4 = new Produto("A menina que roubava livros", 45.00);  
+	    assertEquals(livro3, livro4); 
 	}
 	
 	@Test
